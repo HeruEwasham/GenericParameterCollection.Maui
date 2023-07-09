@@ -1,7 +1,7 @@
 ﻿using System;
 using CommunityToolkit.Maui.Behaviors;
 
-namespace MediaAndMetadataOrganiser.InputPages.InputViews
+namespace YngveHestem.GenericParameterCollection.Maui.InputViews
 {
 	public class TextValidationOptions
 	{

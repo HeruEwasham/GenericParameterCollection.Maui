@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MediaAndMetadataOrganiser.InputPages.InputViews
+namespace YngveHestem.GenericParameterCollection.Maui.InputViews
 {
 	public class PickOptions
 	{
@@ -17,6 +17,21 @@ namespace MediaAndMetadataOrganiser.InputPages.InputViews
         /// The different options to choose from. This value must be set if options should be shown.
         /// </summary>
         public IEnumerable<string> Options = null;
+
+        /// <summary>
+        /// Should the control only be ReadOnly. Default is false.
+        /// </summary>
+        public bool ReadOnly = false;
+
+        /// <summary>
+        /// The options for the "normal" text in the controls.
+        /// </summary>
+        public LabelOptions NormalTextOptions = null;
+
+        /// <summary>
+        /// The options for the border.
+        /// </summary>
+        public BorderOptions BorderOptions = BorderOptions.Default;
     }
 }
 

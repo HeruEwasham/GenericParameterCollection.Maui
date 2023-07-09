@@ -1,24 +1,24 @@
 ﻿using CommunityToolkit.Maui.Behaviors;
 
-namespace MediaAndMetadataOrganiser.InputPages.InputViews;
+namespace YngveHestem.GenericParameterCollection.Maui.InputViews;
 
-public class EditorView : ContentView
+internal class EditorView : ControlView<string>
 {
     private Editor _editor;
 
-    public EditorView(EditorOptions options)
+    public EditorView(EntryEditorOptions options)
 	{
-		var view = new VerticalStackLayout();
-
-        if (options.LabelOptions != null)
-        {
-            view.Add(options.LabelOptions.CreateLabel());
-        }
-
         _editor = new Editor
         {
             Text = options.Value,
-            Keyboard = options.Keyboard
+            Keyboard = options.Keyboard,
+            AutoSize = EditorAutoSizeOption.TextChanges,
+            IsEnabled = !options.ReadOnly,
+            TextColor = options.NormalTextOptions.TextColor,
+            BackgroundColor = options.NormalTextOptions.BackgroundColor,
+            FontAttributes = options.NormalTextOptions.FontAttributes,
+            FontFamily = options.NormalTextOptions.FontFamily,
+            FontSize = options.NormalTextOptions.FontSize
         };
 
         if (options.TextValidationOptions != null)
@@ -40,12 +40,10 @@ public class EditorView : ContentView
             _editor.Behaviors.Add(textValidationBehavior);
         }
 
-        view.Add(_editor);
-
-        Content = view;
+        SetView(options.LabelOptions, _editor, options.BorderOptions);
 	}
 
-    public string GetValue()
+    public override string GetValue()
     {
         return _editor.Text;
     }

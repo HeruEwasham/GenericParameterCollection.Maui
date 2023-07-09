@@ -1,39 +1,47 @@
-﻿namespace MediaAndMetadataOrganiser.InputPages.InputViews;
+﻿namespace YngveHestem.GenericParameterCollection.Maui.InputViews;
 
-public class DateTimePickerView : ContentView
+internal class DateTimePickerView : ControlView<DateTime>
 {
     private DatePicker _datePicker;
     private TimePicker _timePicker;
 
-    public DateTimePickerView(DateTimePickerOptions dateTimePickerOptions)
+    public DateTimePickerView(DateTimePickerOptions options)
 	{
         var view = new VerticalStackLayout();
-        if (dateTimePickerOptions.LabelOptions != null)
-        {
-            view.Add(dateTimePickerOptions.LabelOptions.CreateLabel());
-        }
         
         _datePicker = new DatePicker
         {
-            Date = dateTimePickerOptions.Value,
-            MinimumDate = dateTimePickerOptions.MinimumDate,
-            MaximumDate = dateTimePickerOptions.MaximumDate
+            Date = options.Value,
+            MinimumDate = options.MinimumDate,
+            MaximumDate = options.MaximumDate,
+            IsEnabled = !options.ReadOnly,
+            TextColor = options.NormalTextOptions.TextColor,
+            BackgroundColor = options.NormalTextOptions.BackgroundColor,
+            FontAttributes = options.NormalTextOptions.FontAttributes,
+            FontFamily = options.NormalTextOptions.FontFamily,
+            FontSize = options.NormalTextOptions.FontSize
         };
         view.Add(_datePicker);
 
-        if (!dateTimePickerOptions.PickOnlyDate)
+        if (!options.PickOnlyDate)
         {
             _timePicker = new TimePicker
             {
-                Time = dateTimePickerOptions.Value.TimeOfDay
+                Time = options.Value.TimeOfDay,
+                IsEnabled = !options.ReadOnly,
+                TextColor = options.NormalTextOptions.TextColor,
+                BackgroundColor = options.NormalTextOptions.BackgroundColor,
+                FontAttributes = options.NormalTextOptions.FontAttributes,
+                FontFamily = options.NormalTextOptions.FontFamily,
+                FontSize = options.NormalTextOptions.FontSize
             };
             view.Add(_timePicker);
         }
 
-        Content = view;
+        SetView(options.LabelOptions, view, options.BorderOptions);
 	}
 
-    public DateTime GetValue()
+    public override DateTime GetValue()
     {
         if (_timePicker != null)
         {

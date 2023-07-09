@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MediaAndMetadataOrganiser.InputPages.InputViews
+namespace YngveHestem.GenericParameterCollection.Maui.InputViews
 {
 	public enum PropertyType
 	{

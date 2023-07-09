@@ -1,47 +1,76 @@
-﻿namespace MediaAndMetadataOrganiser.InputPages.InputViews;
+﻿using YngveHestem.BytesPreview.Maui.Core;
+using YngveHestem.FileTypeInfo;
+using YngveHestem.GenericParameterCollection.Maui.Bytes;
+using static System.Net.Mime.MediaTypeNames;
 
-public class DataPickerView : ContentView
+namespace YngveHestem.GenericParameterCollection.Maui.InputViews;
+
+internal class DataPickerView : ControlView<byte[]>
 {
-    private Button _selectButton;
-    private Button _previewButton;
     private byte[] _byteData;
     private string _filePath;
     private string _fileExtension;
+    private DataPickerOptions _options;
     private Page _parentPage;
+    private string _labelString;
+    //private Grid _view;
 
     public DataPickerView(DataPickerOptions options, Page parentPage)
     {
-        var view = new VerticalStackLayout();
-        if (options.LabelOptions != null)
+        if (options.SupportedWaysToGetBytes == null)
         {
-            view.Add(options.LabelOptions.CreateLabel());
+            throw new ArgumentNullException(nameof(options.SupportedWaysToGetBytes));
+        }
+        if (options.SupportedWaysToGetBytes.Length == 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(options.SupportedWaysToGetBytes), "We need at least one supported method to get bytes.");
         }
 
-        _selectButton = new Button
-        {
-            Text = options.SelectButtonText
-        };
-        _selectButton.Clicked += OnSelectClicked;
-
-        _previewButton = new Button
-        {
-            Text = "Show preview"
-        };
-        _previewButton.Clicked += OnPreviewClicked;
-
-        _byteData = options.Value;
+        _byteData = options.Value != null ? options.Value : new byte[0];
+        _filePath = options.FilePath != null ? options.FilePath : string.Empty;
+        _fileExtension = options.FileExtension != null ? options.FileExtension : string.Empty;
         _parentPage = parentPage;
+        _labelString = options.LabelOptions.Text;
+        _options = options;
 
-        Content = new VerticalStackLayout
-		{
-			Children = {
-				new Label { HorizontalOptions = LayoutOptions.Center, VerticalOptions = LayoutOptions.Center, Text = "Welcome to .NET MAUI!"
-				}
-			}
-		};
+        CreateAndSetView();
 	}
 
-    public byte[] GetBytes()
+    private void CreateAndSetView()
+    {
+        var view = new Grid();
+        var row = 0;
+
+        if (!_options.ReadOnly)
+        {
+            view.RowDefinitions.Add(new RowDefinition(50));
+            var selectButton = _options.SelectButtonOptions.CreateButton();
+            selectButton.Text = _options.SelectButtonText;
+            selectButton.Clicked += OnSelectClicked;
+            view.Add(selectButton, 0, row);
+            row++;
+        }
+
+        view.RowDefinitions.Add(new RowDefinition(50));
+        view.Add(_options.InfoTextOptions.CreateLabel("Selected item has size: " + _byteData.Length.GetSizeInMemory()), 0, row);
+        
+        row++;
+
+        if (!string.IsNullOrWhiteSpace(_filePath))
+        {
+            view.RowDefinitions.Add(new RowDefinition(50));
+            view.Add(_options.InfoTextOptions.CreateLabel("Filename: " + _filePath), 0, row);
+            row++;
+        }
+
+        view.RowDefinitions.Add(new RowDefinition(100));
+        view.Add(GetPreview(), 0, row);
+        row++;
+
+        SetView(_options.LabelOptions, view, _options.BorderOptions);
+    }
+
+    public override byte[] GetValue()
     {
         return _byteData;
     }
@@ -56,152 +85,49 @@ public class DataPickerView : ContentView
         return _fileExtension;
     }
 
-    private async void OnPreviewClicked(object sender, EventArgs e)
-    {
-        await _parentPage.Navigation.PushModalAsync(new DataPreviewPage(_filePath, _fileExtension, _byteData));
-    }
-
     private async void OnSelectClicked(object sender, EventArgs e)
     {
-        var choicesToPickFrom = new List<string>();
-        var fileTypes = new List<string>();
-
-        if (fileTypes.Any(s => s == "image") || fileTypes.Any(s => InputPagesExtensions.IsImageExtension(s)))
+        if (_options.SupportedWaysToGetBytes.Length > 1)
         {
-            choicesToPickFrom.Add(InputPagesExtensions.PICK_PHOTO_TEXT);
-        }
-        if (fileTypes.Any(s => s == "video") || fileTypes.Any(s => InputPagesExtensions.IsVideoExtension(s)))
-        {
-            choicesToPickFrom.Add(InputPagesExtensions.PICK_VIDEO_TEXT);
-        }
-        choicesToPickFrom.Add(InputPagesExtensions.PICK_FILE_TEXT);
-        choicesToPickFrom.Add(InputPagesExtensions.PICK_URL_TEXT);
+            var selectedChoice = await _parentPage.DisplayActionSheet(_labelString, "Cancel", null, _options.SupportedWaysToGetBytes.Select(c => c.Name).ToArray());
 
-        var selectedChoice = await _parentPage.DisplayActionSheet("Pick file from", "Cancel", null, choicesToPickFrom.ToArray());
-
-        if (selectedChoice == InputPagesExtensions.PICK_PHOTO_TEXT)
-        {
-            var file = await MediaPicker.Default.PickPhotoAsync(new MediaPickerOptions
+            var result = await _options.SupportedWaysToGetBytes.First(c => c.Name == selectedChoice).GetBytes(_options.SupportedFileTypes, _parentPage);
+            if (result != null)
             {
-                Title = "Pick an image."
-            });
-            if (file != null)
-            {
-                if (InputPagesExtensions.IsImageMimeType(file.ContentType))
-                {
-                    var s = await file.OpenReadAsync();
-                    using (BinaryReader br = new BinaryReader(s))
-                    {
-                        _byteData = br.ReadBytes((int)s.Length);
-                    }
-                    _filePath = file.FullPath;
-                    _fileExtension = Path.GetExtension(file.FileName);
-                }
+                _byteData = result.Bytes;
+                _filePath = result.FilePath;
+                _fileExtension = result.FileExtension;
+                CreateAndSetView();
             }
         }
-        else if (selectedChoice == InputPagesExtensions.PICK_VIDEO_TEXT)
+        else
         {
-            var file = await MediaPicker.Default.PickVideoAsync(new MediaPickerOptions
+            var result = await _options.SupportedWaysToGetBytes[0].GetBytes(_options.SupportedFileTypes, _parentPage);
+
+            if (result != null)
             {
-                Title = "Pick a video."
-            });
-            if (file != null)
-            {
-                if (InputPagesExtensions.IsVideoMimeType(file.ContentType))
-                {
-                    using (var s = await file.OpenReadAsync())
-                    {
-                        using (BinaryReader br = new BinaryReader(s))
-                        {
-                            _byteData = br.ReadBytes((int)s.Length);
-                        }
-                    }
-                    _filePath = file.FullPath;
-                    _fileExtension = Path.GetExtension(file.FileName);
-                }
+                _byteData = result.Bytes;
+                _filePath = result.FilePath;
+                _fileExtension = result.FileExtension;
+                CreateAndSetView();
             }
         }
-        else if (selectedChoice == InputPagesExtensions.PICK_FILE_TEXT)
+    }
+
+    private View GetPreview()
+    {
+        if (_options.SupportedPreviews != null)
         {
-            FilePickerFileType filePickerFileTypes = null;
+            var fileType = _options.SupportedFileTypes.GetByExtension(_fileExtension).FirstOrDefault();
+            var prev = _options.SupportedPreviews.FirstOrDefault(sp => sp.CanPreviewBytes(fileType, _byteData));
 
-            if (fileTypes.All(s => s == "image" || InputPagesExtensions.IsImageExtension(s)))
+            if (prev != null)
             {
-                filePickerFileTypes = FilePickerFileType.Images;
-            }
-            else if (fileTypes.All(s => s == "video" || InputPagesExtensions.IsVideoExtension(s)))
-            {
-                filePickerFileTypes = FilePickerFileType.Videos;
-            }
-            else if (fileTypes.All(s => s == ".jpg" || s == ".jpeg"))
-            {
-                filePickerFileTypes = FilePickerFileType.Jpeg;
-            }
-            else if (fileTypes.All(s => s == ".png"))
-            {
-                filePickerFileTypes = FilePickerFileType.Png;
-            }
-            else if (fileTypes.All(s => s == ".pdf"))
-            {
-                filePickerFileTypes = FilePickerFileType.Png;
-            }
-
-            try
-            {
-                var result = await FilePicker.Default.PickAsync(new Microsoft.Maui.Storage.PickOptions
-                {
-                    PickerTitle = "Pick a file",
-                    FileTypes = filePickerFileTypes != null ? filePickerFileTypes : null
-                });
-                if (result != null)
-                {
-                    if (fileTypes.Any())
-                    {
-                        if (!fileTypes.Any(s => result.FileName.EndsWith(s, StringComparison.OrdinalIgnoreCase)))
-                        {
-                            await _parentPage.DisplayAlert("Filetype not supported", "Filetype " + Path.GetExtension(result.FileName) + " is not expected here. Only filetypes with theese extensions are supported: " + string.Join(", ", fileTypes), "OK", null);
-                            return;
-                        }
-                    }
-
-                    using (var stream = await result.OpenReadAsync())
-                    {
-                        using (BinaryReader br = new BinaryReader(stream))
-                        {
-                            _byteData = br.ReadBytes((int)stream.Length);
-                        }
-                    }
-
-                    _filePath = result.FullPath;
-                    _fileExtension = Path.GetExtension(result.FileName);
-                }
-            }
-            catch (Exception ex)
-            {
-                await _parentPage.DisplayAlert("Something went wrong", "Got error: " + ex.Message, "OK", null);
+                return prev.GetPreviewControl(fileType, _byteData);
             }
         }
-        else if (selectedChoice == InputPagesExtensions.PICK_URL_TEXT)
-        {
-            var url = await _parentPage.DisplayPromptAsync("Pick url", "Give the url you want to get data from", "Download from url", "Cancel");
-
-            if (!string.IsNullOrWhiteSpace(url))
-            {
-                url = url.Trim();
-                var hasValidExtension = true;
-                if (!fileTypes.Any(s => url.EndsWith(s, StringComparison.OrdinalIgnoreCase)))
-                {
-                    hasValidExtension = false;
-                    if (!await _parentPage.DisplayAlert("URL has not explicit file extension", "Url has not an explicit file extension in expected type. This might be because you have selected a url that has not an extension at the end (but will return valid data), but it can also be that you have selected an url that will not return valid data. Expected files normally has theese extensions: " + string.Join(", ", fileTypes) + Environment.NewLine + "Are you sure you want to download? The file downloaded might not be what we expect.", "Download", "Cancel"))
-                    {
-                        return;
-                    }
-                }
-
-                _byteData = await new HttpClient().GetByteArrayAsync(url);
-                _filePath = url;
-                _fileExtension = hasValidExtension ? Path.GetExtension(url) : null;
-            }
-        }
+        var label = _options.InfoTextOptions.CreateLabel();
+        label.Text = "Preview of this content not available.";
+        return label;
     }
 }
