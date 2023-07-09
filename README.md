@@ -1,4 +1,4 @@
-﻿# GenericParameterCollection.EtoForms
+﻿# GenericParameterCollection.Maui
 
 This provides controls for using [GenericParameterCollection](https://github.com/HeruEwasham/GenericParameterCollection) in .NET MAUI.
 
