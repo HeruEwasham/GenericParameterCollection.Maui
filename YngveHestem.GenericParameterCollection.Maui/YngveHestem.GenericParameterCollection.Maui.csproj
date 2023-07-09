@@ -15,6 +15,22 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+
+		<Version>1.0.0-beta01</Version>
+    <Description>This provides controls for using GenericParameterCollection in .NET MAUI.</Description>
+    <PackageReleaseNotes>
+        Version 1.0.0-beta01:
+        - Initial release of a working version.
+		- Mark that even if this version is working, it is still some bugs and oddities, and the project is not finished. But especially the ParameterCollectionView should be usable, even if it is not perfect.
+    </PackageReleaseNotes>
+    <Authors>Yngve J. K. Hestem</Authors>
+    <Copyright>Copyright (c) Yngve J. K. Hestem 2023</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>UI, parameter ParameterCollection collection net maui GUI parameters collections multiple-types-in-collection json key-value key-value-pair</PackageTags>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <RepositoryUrl>https://github.com/HeruEwasham/GenericParameterCollection.Maui.git</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
@@ -42,4 +58,7 @@
 	  <Folder Include="Bytes\" />
 	  <Folder Include="CustomConverters\" />
 	</ItemGroup>
+	<ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 </Project>

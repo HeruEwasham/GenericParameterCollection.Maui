@@ -29,14 +29,9 @@ namespace YngveHestem.GenericParameterCollection.Maui
         public Font NormalFont = Font.Default;
 
         /// <summary>
-        /// Font used on labels.
-        /// </summary>
-        public Font LabelFont = Font.Default;
-
-        /// <summary>
         /// Font used on the parameter names.
         /// </summary>
-        public Font ParameterNameFont = Font.SystemFontOfWeight(FontWeight.Bold/*Font.Default.Weight*/, FontSlant.Default, Font.Default.AutoScalingEnabled);
+        public Font ParameterNameFont = Font.SystemFontOfWeight(FontWeight.Bold, FontSlant.Default, Font.Default.AutoScalingEnabled);
 
         /// <summary>
         /// Font used on submit or add buttons text.
@@ -52,11 +47,6 @@ namespace YngveHestem.GenericParameterCollection.Maui
         /// Color used on text.
         /// </summary>
         public Color NormalTextColor = Colors.Black;
-
-        /// <summary>
-        /// Color used on label text.
-        /// </summary>
-        public Color LabelTextColor = Colors.Black;
 
         /// <summary>
         /// Color used on parameter names text.
@@ -77,11 +67,6 @@ namespace YngveHestem.GenericParameterCollection.Maui
         /// Color used on control background.
         /// </summary>
         public Color NormalBackgroundColor = Colors.Transparent;
-
-        /// <summary>
-        /// Color used on label background.
-        /// </summary>
-        public Color LabelBackgroundColor = Colors.Transparent;
 
         /// <summary>
         /// Color used on parameter names background.
@@ -117,16 +102,6 @@ namespace YngveHestem.GenericParameterCollection.Maui
         /// The control/method to use when selecting a single selection from a list of choices.
         /// </summary>
         public SelectControl SingleSelection = SelectControl.Picker;
-
-        /// <summary>
-        /// The format to use on a DateTime when converting to string when the parameter is for both date and time.
-        /// </summary>
-        public string DateTimeFormat = "g";
-
-        /// <summary>
-        /// The format to use on a DateTime when converting to string when the parameter is for only date.
-        /// </summary>
-        public string DateFormat = "d";
 
         /// <summary>
         /// The keyboard-type to use when nothing is specified. This will not be applicable to numbers.
@@ -172,17 +147,14 @@ namespace YngveHestem.GenericParameterCollection.Maui
                 ShowParameterNameAsHumanReadable = options.ShowParameterNameAsHumanReadable,
                 ReadOnly = options.ReadOnly,
                 NormalFont = options.NormalFont,
-                LabelFont = options.LabelFont,
                 ParameterNameFont = options.ParameterNameFont,
                 SubmitAddFont = options.SubmitAddFont,
                 CancelDeleteFont = options.CancelDeleteFont,
                 NormalTextColor = options.NormalTextColor,
-                LabelTextColor = options.LabelTextColor,
                 ParameterNameTextColor = options.ParameterNameTextColor,
                 SubmitAddTextColor = options.SubmitAddTextColor,
                 CancelDeleteTextColor = options.CancelDeleteTextColor,
                 NormalBackgroundColor = options.NormalBackgroundColor,
-                LabelBackgroundColor = options.LabelBackgroundColor,
                 ParameterNameBackgroundColor = options.ParameterNameBackgroundColor,
                 SubmitAddBackgroundColor = options.SubmitAddBackgroundColor,
                 CancelDeleteBackgroundColor = options.CancelDeleteBackgroundColor,
@@ -190,8 +162,6 @@ namespace YngveHestem.GenericParameterCollection.Maui
                 MaxDate = options.MaxDate,
                 EnumSelection = options.EnumSelection,
                 SingleSelection = options.SingleSelection,
-                DateTimeFormat = options.DateTimeFormat,
-                DateFormat = options.DateFormat,
                 KeyboardType = options.KeyboardType,
                 TextValidation = options.TextValidation,
                 SupportedFileExtensions = options.SupportedFileExtensions,
@@ -246,16 +216,6 @@ namespace YngveHestem.GenericParameterCollection.Maui
                 if (parameters.HasKeyAndCanConvertTo("singleSelection", typeof(SelectControl)))
                 {
                     result.SingleSelection = parameters.GetByKey<SelectControl>("singleSelection");
-                }
-
-                if (parameters.HasKeyAndCanConvertTo("dateTimeFormat", typeof(string)))
-                {
-                    result.DateTimeFormat = parameters.GetByKey<string>("dateTimeFormat");
-                }
-
-                if (parameters.HasKeyAndCanConvertTo("dateFormat", typeof(string)))
-                {
-                    result.DateFormat = parameters.GetByKey<string>("dateFormat");
                 }
 
                 if (parameters.HasKeyAndCanConvertTo("keyboard", typeof(Keyboard), Extensions.CUSTOM_PARAMETER_CONVERTERS))

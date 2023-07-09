@@ -6,6 +6,14 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
     {
 		public EditableListCell(Parameter parameter, TValue defaultValue, ParameterCollectionViewOptions options, Page parentPage) : base(parameter)
 		{
+            if (parameter.HasAdditionalInfo())
+            {
+                var additionalInfo = parameter.GetAdditionalInfo();
+                if (additionalInfo.HasKeyAndCanConvertTo("defaultValue", typeof(TValue), Extensions.CUSTOM_PARAMETER_CONVERTERS))
+                {
+                    defaultValue = additionalInfo.GetByKey<TValue>("defaultValue", Extensions.CUSTOM_PARAMETER_CONVERTERS);
+                }
+            }
             var viewOptions = new EditableListOptions<TValue>
             {
                 LabelOptions = options.CellTitleLabelOptions(parameter.Key),

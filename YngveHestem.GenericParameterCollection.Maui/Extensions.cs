@@ -1,8 +1,6 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
 using YngveHestem.GenericParameterCollection.Maui.CustomConverters;
-using YngveHestem.GenericParameterCollection.Maui.InputViews;
 using YngveHestem.GenericParameterCollection.ParameterValueConverters;
 
 namespace YngveHestem.GenericParameterCollection.Maui
