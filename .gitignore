@@ -403,3 +403,23 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+/TestProject/obj/Debug/net7.0-android/designtime/build.props
+/TestProject/obj/Debug/net7.0-android/designtime/Resource.designer.cs
+/TestProject/obj/Debug/net7.0-android/lp/164/jl/proguard.txt
+/TestProject/obj/Debug/net7.0-android/lp/164.stamp
+/TestProject/obj/Debug/net7.0-android/TestProject.assets.cache
+/TestProject/obj/Debug/net7.0-android/TestProject.csproj.AssemblyReference.cache
+/TestProject/obj/Debug/net7.0-android/TestProject.GeneratedMSBuildEditorConfig.editorconfig
+/TestProject/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/TestProject.nfloat.g.cs
+/TestProject/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/TestProject.GeneratedMSBuildEditorConfig.editorconfig
+/TestProject/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/TestProject.csproj.AssemblyReference.cache
+/TestProject/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/TestProject.assets.cache
+/TestProject/obj/Debug/net7.0-ios/iossimulator-x64/TestProject.nfloat.g.cs
+/TestProject/obj/Debug/net7.0-ios/iossimulator-x64/TestProject.GeneratedMSBuildEditorConfig.editorconfig
+/TestProject/obj/Debug/net7.0-ios/iossimulator-x64/TestProject.csproj.AssemblyReference.cache
+/TestProject/obj/Debug/net7.0-ios/iossimulator-x64/TestProject.assets.cache
+/TestProject/obj/project.assets.json
+/TestProject/obj/project.nuget.cache
+/TestProject/obj/TestProject.csproj.nuget.dgspec.json
+/TestProject/obj/TestProject.csproj.nuget.g.props
+/TestProject/obj/TestProject.csproj.nuget.g.targets
