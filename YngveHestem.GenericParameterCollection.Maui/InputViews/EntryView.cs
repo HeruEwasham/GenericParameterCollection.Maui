@@ -8,16 +8,6 @@ internal class EntryView : ControlView<string>
 
     public EntryView(EntryEditorOptions options)
 	{
-        /*var view = new Grid
-        {
-            ColumnDefinitions = new ColumnDefinitionCollection(new ColumnDefinition(GridLength.Auto), new ColumnDefinition(GridLength.Star))
-        };
-
-        if (options.LabelOptions != null)
-        {
-            view.Add(options.LabelOptions.CreateLabel(), 0);
-        }*/
-
         _editor = new Entry
         {
             Text = options.Value,
@@ -48,8 +38,6 @@ internal class EntryView : ControlView<string>
 
             _editor.Behaviors.Add(textValidationBehavior);
         }
-
-        //view.Add(_editor, 1);
 
         SetView(options.LabelOptions, _editor, options.BorderOptions);
 	}
