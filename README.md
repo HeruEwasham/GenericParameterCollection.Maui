@@ -2,6 +2,10 @@
 
 This provides controls for using [GenericParameterCollection](https://github.com/HeruEwasham/GenericParameterCollection) in .NET MAUI.
 
+## How to use this package
+
+The easiest way to use the package is to download it from nuget: https://www.nuget.org/packages/YngveHestem.GenericParameterCollection.Maui/
+
 ## Status of this project
 
 This project is in it's early stages. The controls work, but especially the popup has it's own oddities. At this stage, I recommend using the GetParameterCollectionView for minimal oddities, but be aware that at the current stage, it is multiple known oddities and other things to be fixed.
