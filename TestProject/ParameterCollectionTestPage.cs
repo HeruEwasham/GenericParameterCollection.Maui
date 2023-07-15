@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using YngveHestem.GenericParameterCollection;
 using YngveHestem.GenericParameterCollection.Maui;
+using Extensions = YngveHestem.GenericParameterCollection.Maui.Extensions;
 
 namespace TestProject;
 
@@ -31,8 +32,8 @@ public class ParameterCollectionTestPage : ContentPage
                 { "Actors", new string[] { } }
             }),
             new Parameter("A question", new string[] { "new test", "test 2" }),
-            new Parameter("Some dates", new DateTime[] { DateTime.Now, DateTime.MaxValue, DateTime.MinValue, DateTime.UtcNow, new DateTime(2021, 06, 15) }, true),
-            new Parameter("Some dates and times", new DateTime[] { DateTime.Now, DateTime.MaxValue, DateTime.MinValue, DateTime.UtcNow, new DateTime(2021, 06, 15) }, false),
+            new Parameter("Some dates", new DateTime[] { DateTime.Now, new DateTime(2099,01, 03), new DateTime(1900, 01, 03), DateTime.UtcNow, new DateTime(2021, 06, 15) }, true),
+            new Parameter("Some dates and times", new DateTime[] { DateTime.Now, new DateTime(2099, 01, 03, 20, 9, 0), new DateTime(1900, 01, 03, 5, 13, 45), DateTime.UtcNow, new DateTime(2021, 06, 15) }, false),
             new Parameter("Bytes without content", new byte[0], new ParameterCollection
             {
                 { "supportedExtensions", new[] {".jpg", ".bmp", ".m4v", ".mp4", ".mkv"} }

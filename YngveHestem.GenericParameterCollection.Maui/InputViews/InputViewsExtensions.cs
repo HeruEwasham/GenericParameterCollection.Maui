@@ -49,7 +49,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputViews
         /// <param name="text"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static LabelOptions CellTitleLabelOptions(this ParameterCollectionViewOptions options, string text)
+        public static LabelOptions ParameterNameLabelOptions(this ParameterCollectionViewOptions options, string text)
         {
             return new LabelOptions
             {

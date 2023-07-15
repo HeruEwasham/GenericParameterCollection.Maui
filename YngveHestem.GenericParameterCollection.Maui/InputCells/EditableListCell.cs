@@ -16,7 +16,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
             }
             var viewOptions = new EditableListOptions<TValue>
             {
-                LabelOptions = options.CellTitleLabelOptions(parameter.Key),
+                LabelOptions = options.ParameterNameLabelOptions(parameter.Key),
                 Value = parameter.GetValue<List<TValue>>(Extensions.CUSTOM_PARAMETER_CONVERTERS),
                 DefaultValue = defaultValue,
                 ParameterCollectionViewOptions = options,

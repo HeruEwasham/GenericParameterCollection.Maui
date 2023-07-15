@@ -9,7 +9,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
         {
             var dateTimePickerOptions = new DateTimePickerOptions
             {
-                LabelOptions = options.CellTitleLabelOptions(parameter.Key),
+                LabelOptions = options.ParameterNameLabelOptions(parameter.Key),
                 Value = parameter.GetValue<DateTime>(Extensions.CUSTOM_PARAMETER_CONVERTERS),
                 PickOnlyDate = parameter.Type == ParameterType.Date,
                 MinimumDate = options.MinDate,

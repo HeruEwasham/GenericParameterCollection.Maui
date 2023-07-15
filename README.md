@@ -72,8 +72,8 @@ Mark that it exist multiple parameters that currently can not be defined in a Pa
 | ParameterNameBackgroundColor |  | Color | Color used on parameter names background | Colors.Transparent |
 | SubmitAddBackgroundColor |  | Color | Color used on submit or add buttons background | Colors.LimeGreen |
 | CancelDeleteBackgroundColor |  | Color | Color used on cancel or delete buttons background | Colors.Red |
-| MinDate | minDate | DateTime | What should be the lowest date that can be selected | DateTime.MinDate |
-| MaxDate | maxDate | DateTime | What should be the highest date that can be selected | DateTime.MaxValue |
+| MinDate | minDate | DateTime | What should be the lowest date that can be selected | new DateTime(1900, 01, 01) |
+| MaxDate | maxDate | DateTime | What should be the highest date that can be selected | new DateTime(2100, 12, 31) |
 | EnumSelection | enumSelection | Enum of SelectControl | Define what control should be used for enums (valid values are "Picker", "SelectFromList") | Picker |
 | SingleSelection | singleSelection | Enum of SelectControl | Define what control should be used for selecting a single value from a list (valid values are "Picker", "SelectFromList") | Picker |
 | KeyboardType | keyboard | Keyboard | Define what keyboard type should be used (valid values are "default", "chat", "email", "numeric", "plain", "telephone", "text", "url") | default |

@@ -7,7 +7,17 @@ internal class DateTimePickerView : ControlView<DateTime>
 
     public DateTimePickerView(DateTimePickerOptions options)
 	{
-        var view = new VerticalStackLayout();
+        var columnDef = new ColumnDefinitionCollection { new ColumnDefinition(GridLength.Star) };
+
+        if (!options.PickOnlyDate)
+        {
+            columnDef.Add(new ColumnDefinition(GridLength.Star));
+        }
+
+        var view = new Grid
+        {
+            ColumnDefinitions = columnDef
+        };
         
         _datePicker = new DatePicker
         {
@@ -21,7 +31,7 @@ internal class DateTimePickerView : ControlView<DateTime>
             FontFamily = options.NormalTextOptions.FontFamily,
             FontSize = options.NormalTextOptions.FontSize
         };
-        view.Add(_datePicker);
+        view.Add(_datePicker, 0);
 
         if (!options.PickOnlyDate)
         {
@@ -35,7 +45,7 @@ internal class DateTimePickerView : ControlView<DateTime>
                 FontFamily = options.NormalTextOptions.FontFamily,
                 FontSize = options.NormalTextOptions.FontSize
             };
-            view.Add(_timePicker);
+            view.Add(_timePicker, 1);
         }
 
         SetView(options.LabelOptions, view, options.BorderOptions);

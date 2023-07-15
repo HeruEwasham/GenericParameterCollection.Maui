@@ -10,7 +10,6 @@ public class ParameterCollectionView : ContentView
     private Page _parentPage;
 
     internal static readonly GridLength SingleRowHeight = new GridLength(50, GridUnitType.Star);
-    internal static readonly GridLength DoubleRowHeight = new GridLength(100, GridUnitType.Star);
 
     /// <summary>
     /// Creates a view that will show the ParameterCollection with the given options.
@@ -42,7 +41,6 @@ public class ParameterCollectionView : ContentView
         var grid = new Grid
         {
             RowSpacing = 10,
-            //ColumnDefinitions = new ColumnDefinitionCollection(new ColumnDefinition(new GridLength(500))),
             RowDefinitions = new RowDefinitionCollection(rowDefinitions.ToArray())
         };
         for (var i = 0; i < _cells.Count; i++)
@@ -101,7 +99,7 @@ public class ParameterCollectionView : ContentView
         }
         else if (parameter.Type == ParameterType.Date || parameter.Type == ParameterType.DateTime)
         {
-            return new (new DateTimePickerCell(parameter, options), DoubleRowHeight);
+            return new (new DateTimePickerCell(parameter, options), SingleRowHeight);
         }
         else if (parameter.Type == ParameterType.Bytes)
         {

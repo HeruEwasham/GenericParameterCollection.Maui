@@ -10,7 +10,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
             var value = parameter.GetValue<Tuple<IEnumerable<string>, IEnumerable<string>>>(Extensions.CUSTOM_PARAMETER_CONVERTERS);
             var pickOptions = new InputViews.SelectFromListOptions
             {
-                LabelOptions = options.CellTitleLabelOptions(parameter.Key),
+                LabelOptions = options.ParameterNameLabelOptions(parameter.Key),
                 Options = value.Item2,
                 Value = value.Item1,
                 ReadOnly = options.ReadOnly,

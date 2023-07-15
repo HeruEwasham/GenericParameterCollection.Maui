@@ -8,7 +8,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
         {
             var editorOptions = new EntryEditorOptions
             {
-                LabelOptions = options.CellTitleLabelOptions(parameter.Key),
+                LabelOptions = options.ParameterNameLabelOptions(parameter.Key),
                 Value = parameter.GetValue<string>(Extensions.CUSTOM_PARAMETER_CONVERTERS),
                 Keyboard = options.KeyboardType,
                 TextValidationOptions = options.TextValidation,

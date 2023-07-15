@@ -8,7 +8,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
         {
             View = new SwitchView(new SwitchOptions
             {
-                LabelOptions = options.CellTitleLabelOptions(parameter.Key),
+                LabelOptions = options.ParameterNameLabelOptions(parameter.Key),
                 Value = parameter.GetValue<bool>(Extensions.CUSTOM_PARAMETER_CONVERTERS),
                 ReadOnly = options.ReadOnly,
                 NormalBackgroundColor = options.NormalBackgroundColor,

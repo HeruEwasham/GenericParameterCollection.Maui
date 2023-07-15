@@ -13,7 +13,6 @@ internal class DataPickerView : ControlView<byte[]>
     private DataPickerOptions _options;
     private Page _parentPage;
     private string _labelString;
-    //private Grid _view;
 
     public DataPickerView(DataPickerOptions options, Page parentPage)
     {

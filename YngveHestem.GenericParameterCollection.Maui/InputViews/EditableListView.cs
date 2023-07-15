@@ -13,7 +13,17 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputViews
 		{
             _options = options;
             _parentPage = parentPage;
-            var view = new VerticalStackLayout();
+            var rowDefinitions = new RowDefinitionCollection();
+            var isWinUI = DeviceInfo.Current.Platform == DevicePlatform.WinUI;
+            if (isWinUI)
+            {
+                rowDefinitions.Add(new RowDefinition(ParameterCollectionView.SingleRowHeight));
+            }
+            rowDefinitions.Add(new RowDefinition(GridLength.Star));
+            var view = new Grid()
+            {
+                RowDefinitions = rowDefinitions
+            };
             _controlCollection = new ObservableCollection<TControlType>();
 			for (var i = 0; i < options.Value.Count; i++)
 			{
@@ -30,7 +40,14 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputViews
                 FontAttributes = _options.ParameterCollectionViewOptions.SubmitAddFont.GetFontAttributes(),
             };
             addButton.Clicked += OnAddButtonClicked;
-            collectionView.Header = addButton;
+            if (isWinUI)
+            {
+                view.Add(addButton, 0, 0);
+            }
+            else
+            {
+                collectionView.Header = addButton;
+            }
             collectionView.ItemTemplate = new DataTemplate(() =>
             {
                 var deleteButton = new SwipeItem
@@ -39,15 +56,28 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputViews
                     BackgroundColor = options.ParameterCollectionViewOptions.CancelDeleteBackgroundColor
                 };
                 deleteButton.Invoked += DeleteButton_Invoked;
+                var deleteButtonMenuItem = new MenuFlyoutItem { Text = "Delete" };
+                deleteButtonMenuItem.Clicked += DeleteButtonMenuItemClicked;
+                var menu = new MenuFlyout
+                {
+                    { deleteButtonMenuItem }
+                };
                 var swipe = new SwipeView
                 {
-                    RightItems = new SwipeItems(new[] { deleteButton })
+                    RightItems = new SwipeItems(new[] { deleteButton }),
                 };
                 swipe.SetBinding(ContentProperty, ".");
+                FlyoutBase.SetContextFlyout(swipe, menu);
                 return swipe;
             });
-            view.Add(collectionView);
+            view.Add(collectionView, 0, isWinUI ? 1 : 0);
             SetView(options.LabelOptions, view, options.BorderOptions);
+        }
+
+        private void DeleteButtonMenuItemClicked(object sender, EventArgs e)
+        {
+            var content = ((MenuFlyoutItem)sender).BindingContext as TControlType;
+            _controlCollection.Remove(content);
         }
 
         private void DeleteButton_Invoked(object sender, EventArgs e)

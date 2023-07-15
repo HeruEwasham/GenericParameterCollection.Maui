@@ -86,12 +86,12 @@ namespace YngveHestem.GenericParameterCollection.Maui
         /// <summary>
         /// The lowest date to be selected in appropiate controls.
         /// </summary>
-        public DateTime MinDate = DateTime.MinValue;
+        public DateTime MinDate = new DateTime(1900, 01, 01);
 
         // <summary>
         /// The maximum date to be selected in appropiate controls.
         /// </summary>
-        public DateTime MaxDate = DateTime.MaxValue;
+        public DateTime MaxDate = new DateTime(2100, 12, 31);
 
         /// <summary>
         /// The control/method to use when selecting an enum-value.

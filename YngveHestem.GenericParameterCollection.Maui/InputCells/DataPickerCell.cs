@@ -21,7 +21,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
         {
             var dataPickerOptions = new DataPickerOptions
             {
-                LabelOptions = options.CellTitleLabelOptions(parameter.Key),
+                LabelOptions = options.ParameterNameLabelOptions(parameter.Key),
                 Value = parameter.GetValue<byte[]>(Extensions.CUSTOM_PARAMETER_CONVERTERS),
                 SelectButtonText = selectButtonText,
                 SupportedFileTypes = options.FileTypeMappings.GetByExtension(options.SupportedFileExtensions).ToArray(),

@@ -11,12 +11,8 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputViews
 		{
             _expander = new Expander
             {
-                Header = new Label
-                {
-                    Text = headerText,
-                },
+                Header = options.ParameterNameLabelOptions(headerText).CreateLabel(),
                 Content = new ParameterCollectionView(value, parentPage, options),
-                //IsClippedToBounds = true,
                 IsExpanded = true,
             };
 
