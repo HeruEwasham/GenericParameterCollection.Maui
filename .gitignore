@@ -423,3 +423,8 @@ ASALocalRun/
 /TestProject/obj/TestProject.csproj.nuget.dgspec.json
 /TestProject/obj/TestProject.csproj.nuget.g.props
 /TestProject/obj/TestProject.csproj.nuget.g.targets
+/TestProject/obj/Release/net7.0-android/TestProject.GeneratedMSBuildEditorConfig.editorconfig
+/TestProject/obj/Release/net7.0-android/TestProject.csproj.AssemblyReference.cache
+/TestProject/obj/Release/net7.0-android/TestProject.assets.cache
+/TestProject/obj/Debug/net7.0-android/lp/163/jl/proguard.txt
+/TestProject/obj/Debug/net7.0-android/lp/163.stamp
