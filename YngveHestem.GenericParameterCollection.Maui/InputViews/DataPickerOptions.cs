@@ -43,9 +43,29 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputViews
         public IBytesPreview[] SupportedPreviews = null;
 
         /// <summary>
+        /// What should the text before the number of bytes is shown when getting bytes be.
+        /// </summary>
+        public string ByteSizeText = "Selected item has size: ";
+
+        /// <summary>
+        /// What should the text before the file name is shown when getting bytes be.
+        /// </summary>
+        public string FilenameText = "Filename: ";
+
+        /// <summary>
+        /// What should the text to display when preview of byte-content is not available be.
+        /// </summary>
+        public string PreviewOfThisContentNotAvailableText = "Preview of this content not available.";
+
+        /// <summary>
         /// The text to be shown on the button when the button to select a new source/resource.
         /// </summary>
         public string SelectButtonText = "Select new resource";
+
+        /// <summary>
+        /// What should the text on the Cancel-button be.
+        /// </summary>
+        public string CancelText = "Cancel";
 
         /// <summary>
         /// The options on the button when the button to select a new source/resource.

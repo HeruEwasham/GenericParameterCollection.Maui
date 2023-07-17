@@ -30,7 +30,11 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
                 ReadOnly = options.ReadOnly,
                 SelectButtonOptions = options.SubmitAddOptions(string.Empty),
                 InfoTextOptions = options.NormalTextOptions(string.Empty),
-                BorderOptions = options.BorderOptions
+                BorderOptions = options.BorderOptions,
+                ByteSizeText = options.ByteSizeText,
+                FilenameText = options.FilenameText,
+                PreviewOfThisContentNotAvailableText = options.PreviewOfThisContentNotAvailableText,
+                CancelText = options.CancelText,
             };
 
             if (parameter.HasAdditionalInfo())

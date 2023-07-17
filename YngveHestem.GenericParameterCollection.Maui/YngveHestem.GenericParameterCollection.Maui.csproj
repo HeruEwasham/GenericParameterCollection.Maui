@@ -16,9 +16,15 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 
-		<Version>1.0.0-beta03</Version>
+		<Version>1.0.0-beta04</Version>
     <Description>This provides controls for using GenericParameterCollection in .NET MAUI.</Description>
     <PackageReleaseNotes>
+				Version 1.0.0-beta04:
+        - Fixed the problem with the popup-properties not working by adding them in it's own options-object.
+        - Added properties to view-options to make the text shown more customizable (including the possibillity to set the text in different languages).
+        - Added the possibillity to use a ParameterType.String to pick a folder.
+        - Some other small changes.
+        
 				Version 1.0.0-beta03:
         - Fixed bug with Dates going out of bounds and crashing on Windows.
         - Set Date- and Time-pickers on same line.

@@ -32,7 +32,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputViews
             var collectionView = new CollectionView { ItemsSource = _controlCollection };
             var addButton = new Button
             {
-                Text = "Add",
+                Text = _options.ParameterCollectionViewOptions.AddText,
                 TextColor = _options.ParameterCollectionViewOptions.SubmitAddTextColor,
                 FontFamily = _options.ParameterCollectionViewOptions.SubmitAddFont.Family,
                 BackgroundColor = options.ParameterCollectionViewOptions.SubmitAddBackgroundColor,
@@ -52,11 +52,11 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputViews
             {
                 var deleteButton = new SwipeItem
                 {
-                    Text = "Delete",
+                    Text = _options.ParameterCollectionViewOptions.DeleteText,
                     BackgroundColor = options.ParameterCollectionViewOptions.CancelDeleteBackgroundColor
                 };
                 deleteButton.Invoked += DeleteButton_Invoked;
-                var deleteButtonMenuItem = new MenuFlyoutItem { Text = "Delete" };
+                var deleteButtonMenuItem = new MenuFlyoutItem { Text = _options.ParameterCollectionViewOptions.DeleteText };
                 deleteButtonMenuItem.Clicked += DeleteButtonMenuItemClicked;
                 var menu = new MenuFlyout
                 {

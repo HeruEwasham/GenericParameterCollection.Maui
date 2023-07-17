@@ -37,6 +37,21 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputViews
         /// The options for the border.
         /// </summary>
         public BorderOptions BorderOptions = BorderOptions.Default;
+
+        /// <summary>
+        /// Should a FolderPicker-button be shown besides the text-input, as an option for getting input.
+        /// </summary>
+        public bool ShowFolderPicker = false;
+
+        /// <summary>
+        /// If the ShowFolderPicker is shown, should the text-field be readOnly or not.
+        /// </summary>
+        public bool TextReadOnlyWhenPickerIsShown = false;
+
+        /// <summary>
+        /// The text to display on the FolderPicker-button if shown.
+        /// </summary>
+        public string FolderPickerText = "Pick folder";
     }
 }
 

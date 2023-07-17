@@ -139,6 +139,56 @@ namespace YngveHestem.GenericParameterCollection.Maui
         /// </summary>
         public BorderOptions BorderOptions = BorderOptions.Default;
 
+        /// <summary>
+        /// For ParameterType.String, should a FolderPicker-Button be shown besides the text-input, as an option for getting input.
+        /// </summary>
+        public bool ShowFolderPicker = false;
+
+        /// <summary>
+        /// If the ShowFolderPicker is shown, should the text-field be readOnly or not.
+        /// </summary>
+        public bool TextReadOnlyWhenPickerIsShown = false;
+
+        /// <summary>
+        /// What should the text on the Add-buttons be.
+        /// </summary>
+        public string AddText = "Add";
+
+        /// <summary>
+        /// What should the text on the Cancel-button be.
+        /// </summary>
+        public string CancelText = "Cancel";
+
+        /// <summary>
+        /// What should the text on the Delete-button be.
+        /// </summary>
+        public string DeleteText = "Delete";
+
+        /// <summary>
+        /// What should the text before the number of bytes is shown when getting bytes be.
+        /// </summary>
+        public string ByteSizeText = "Selected item has size: ";
+
+        /// <summary>
+        /// What should the text before the file name is shown when getting bytes be.
+        /// </summary>
+        public string FilenameText = "Filename: ";
+
+        /// <summary>
+        /// What should the text to display when preview of byte-content is not available be.
+        /// </summary>
+        public string PreviewOfThisContentNotAvailableText = "Preview of this content not available.";
+
+        /// <summary>
+        /// What should the text on the PickBytes-button be.
+        /// </summary>
+        public string PickBytesText = "Select new resource";
+
+        /// <summary>
+        /// What should the text on the PickFolder-button be.
+        /// </summary>
+        public string PickFolderText = "Pick folder";
+
         public static ParameterCollectionViewOptions CreateCopy(ParameterCollectionViewOptions options)
         {
             return new ParameterCollectionViewOptions
@@ -168,7 +218,17 @@ namespace YngveHestem.GenericParameterCollection.Maui
                 BytesPreviews = options.BytesPreviews,
                 SupportedWaysToGetBytes = options.SupportedWaysToGetBytes,
                 FileTypeMappings = options.FileTypeMappings,
-                BorderOptions = options.BorderOptions
+                BorderOptions = options.BorderOptions,
+                ShowFolderPicker = options.ShowFolderPicker,
+                TextReadOnlyWhenPickerIsShown = options.TextReadOnlyWhenPickerIsShown,
+                AddText = options.AddText,
+                CancelText = options.CancelText,
+                DeleteText = options.DeleteText,
+                ByteSizeText = options.ByteSizeText,
+                FilenameText = options.FilenameText,
+                PreviewOfThisContentNotAvailableText = options.PreviewOfThisContentNotAvailableText,
+                PickBytesText = options.PickBytesText,
+                PickFolderText = options.PickFolderText
             };
         }
 
@@ -236,6 +296,56 @@ namespace YngveHestem.GenericParameterCollection.Maui
                 if (parameters.HasKeyAndCanConvertTo("borderOptions", typeof(ParameterCollection)))
                 {
                     result.BorderOptions = BorderOptions.CreateFromParameterCollection(parameters.GetByKey<ParameterCollection>("borderOptions"), defaultOptions.BorderOptions);
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("showFolderPicker", typeof(bool)))
+                {
+                    result.ShowFolderPicker = parameters.GetByKey<bool>("showFolderPicker");
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("textReadOnly", typeof(bool)))
+                {
+                    result.TextReadOnlyWhenPickerIsShown = parameters.GetByKey<bool>("textReadOnly");
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("addText", typeof(string)))
+                {
+                    result.AddText = parameters.GetByKey<string>("addText");
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("cancelText", typeof(string)))
+                {
+                    result.CancelText = parameters.GetByKey<string>("cancelText");
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("deleteText", typeof(string)))
+                {
+                    result.DeleteText = parameters.GetByKey<string>("deleteText");
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("byteSizeText", typeof(string)))
+                {
+                    result.ByteSizeText = parameters.GetByKey<string>("byteSizeText");
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("filenameText", typeof(string)))
+                {
+                    result.FilenameText = parameters.GetByKey<string>("filenameText");
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("previewContentNotAvailableText", typeof(string)))
+                {
+                    result.PreviewOfThisContentNotAvailableText = parameters.GetByKey<string>("previewContentNotAvailableText");
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("pickBytesText", typeof(string)))
+                {
+                    result.PickBytesText = parameters.GetByKey<string>("pickBytesText");
+                }
+
+                if (parameters.HasKeyAndCanConvertTo("pickFolderText", typeof(string)))
+                {
+                    result.PickFolderText = parameters.GetByKey<string>("pickFolderText");
                 }
             }
             return result;

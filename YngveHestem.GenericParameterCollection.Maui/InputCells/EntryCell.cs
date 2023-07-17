@@ -14,7 +14,10 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
                 TextValidationOptions = options.TextValidation,
                 ReadOnly = options.ReadOnly,
                 NormalTextOptions = options.NormalTextOptions(string.Empty),
-                BorderOptions = options.BorderOptions
+                BorderOptions = options.BorderOptions,
+                ShowFolderPicker = options.ShowFolderPicker,
+                TextReadOnlyWhenPickerIsShown = options.TextReadOnlyWhenPickerIsShown,
+                FolderPickerText = options.PickFolderText
             };
 
             if (parameter.HasAdditionalInfo())

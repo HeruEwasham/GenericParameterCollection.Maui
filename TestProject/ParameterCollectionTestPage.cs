@@ -39,12 +39,22 @@ public class ParameterCollectionTestPage : ContentPage
                 { "supportedExtensions", new[] {".jpg", ".bmp", ".m4v", ".mp4", ".mkv"} }
             }),
             new Parameter("Bytes with content", new byte[] { 5, 2 }),
-            new Parameter("number", 1)
+            new Parameter("number", 1),
+            new Parameter("Pick folder wih empty default value", string.Empty, new ParameterCollection
+            {
+                { "showFolderPicker", true} 
+            }),
+            new Parameter("Pick folder with AppData directory as default value", FileSystem.Current.AppDataDirectory, new ParameterCollection
+            {
+                { "showFolderPicker", true},
+                { "pickFolderText", "Pick" },
+                { "textReadOnly", true }
+            })
         };
 
     private Editor _editor = new Editor
     {
-        IsEnabled = false
+        IsReadOnly = true
     };
 
     public ParameterCollectionTestPage()
@@ -56,7 +66,20 @@ public class ParameterCollectionTestPage : ContentPage
         };
         button.Clicked += async (s, e) =>
         {
-            var popup = new ParameterCollectionPopup(Parameters, this);
+            var popup = new ParameterCollectionPopup(Parameters, this, null, new ParameterCollectionPopupOptions
+            {
+                CancelButtonOptions = new YngveHestem.GenericParameterCollection.Maui.InputViews.LabelOptions
+                {
+                    Text = "Decline",
+                    BackgroundColor = Colors.Yellow
+                },
+                SubmitButtonOptions = new YngveHestem.GenericParameterCollection.Maui.InputViews.LabelOptions
+                {
+                    Text = "OK",
+                    BackgroundColor = Colors.Blue
+                }
+            });
+
             var result = await this.ShowPopupAsync(popup);
 
             if (result is ParameterCollection parameters)

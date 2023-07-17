@@ -1,71 +1,51 @@
-﻿using System;
-using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Views;
 using YngveHestem.GenericParameterCollection.Maui.InputViews;
 
 namespace YngveHestem.GenericParameterCollection.Maui
 {
-	public class ParameterCollectionPopup : Popup
+    public class ParameterCollectionPopup : Popup
 	{
-        /// <summary>
-        /// The options for the Cancel-button. If null the text will be "Cancel" and the rest will be based on the CancelDelete-options from the inputted options.
-        /// </summary>
-        public LabelOptions CancelButtonOptions = null;
-
-        /// <summary>
-        /// The options for the Cancel-button. If null the text will be "Submit" and the rest will be based on the SubmitAdd-options from the inputted options.
-        /// </summary>
-        public LabelOptions SubmitButtonOptions = null;
-
-		/// <summary>
-		/// Should the value be validated before returning? If this is set to true it will not allow returning a value before everything is valid.
-		/// </summary>
-		public bool Validate = true;
-
-        /// <summary>
-        /// If validation fails, this text will be the title on the popup that appears. 
-        /// </summary>
-        public string ValidationFailedTitle = "Validation failed";
-
-        /// <summary>
-        /// If validation fails, this text will be the message on the popup that appears. 
-        /// </summary>
-        public string ValidationFailedMessage = "One or more values has validation errors. You can not submit without all values are as expected.";
-
-        /// <summary>
-        /// If validation fails, this text will be the text on the button to dismiss the "validation failed"-popup. 
-        /// </summary>
-        public string ValidationFailedButtonText = "OK";
-
         private ParameterCollectionView _view;
 
-		public ParameterCollectionPopup(ParameterCollection parameterCollection, Page parentPage, ParameterCollectionViewOptions options = null)
+        /// <summary>
+        /// Creates a popup that will show the ParameterCollection with the given options and a button to close and one button to submit and get the new ParameterCollection.
+        /// </summary>
+        /// <param name="parameterCollection">The ParameterCollection to show.</param>
+        /// <param name="parentPage">The page this view is shown on.</param>
+        /// <param name="options">The options for this view. If null, this will use the default options.</param>
+        /// <param name="popupOptions">Options specified to the popup.</param>
+        public ParameterCollectionPopup(ParameterCollection parameterCollection, Page parentPage, ParameterCollectionViewOptions options = null, ParameterCollectionPopupOptions popupOptions = null)
 		{
             if (options == null)
             {
                 options = new ParameterCollectionViewOptions();
             }
-            if (CancelButtonOptions == null)
+            if (popupOptions == null)
             {
-                CancelButtonOptions = options.CancelDeleteOptions("Cancel");
+                popupOptions = new ParameterCollectionPopupOptions();
             }
-            if (SubmitButtonOptions == null)
+            if (popupOptions.CancelButtonOptions == null)
             {
-                SubmitButtonOptions = options.SubmitAddOptions("Submit");
+                popupOptions.CancelButtonOptions = options.CancelDeleteOptions("Cancel");
+            }
+            if (popupOptions.SubmitButtonOptions == null)
+            {
+                popupOptions.SubmitButtonOptions = options.SubmitAddOptions("Submit");
             }
             _view = new ParameterCollectionView(parameterCollection, parentPage, options);
-            var cancelButton = CancelButtonOptions.CreateButton();
+            var cancelButton = popupOptions.CancelButtonOptions.CreateButton();
             cancelButton.Clicked += (s, e) => { Close(); };
-            var submitButton = SubmitButtonOptions.CreateButton();
+            var submitButton = popupOptions.SubmitButtonOptions.CreateButton();
             submitButton.Clicked += (s, e) =>
             {
-                var value = _view.GetParameterCollection(Validate);
+                var value = _view.GetParameterCollection(popupOptions.Validate);
                 if (value != null)
                 {
                     Close(value);
                 }
                 else
                 {
-                    parentPage.DisplayAlert(ValidationFailedTitle, ValidationFailedMessage, ValidationFailedButtonText);
+                    parentPage.DisplayAlert(popupOptions.ValidationFailedTitle, popupOptions.ValidationFailedMessage, popupOptions.ValidationFailedButtonText);
                 }
             };
             var grid = new Grid

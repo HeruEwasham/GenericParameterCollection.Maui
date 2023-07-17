@@ -90,3 +90,13 @@ Mark that it exist multiple parameters that currently can not be defined in a Pa
 | SupportedWaysToGetBytes |  | IGetBytes[] | List with all supported ways to get byte-arrays. If one or more parameters has ParameterType.Bytes, the editor will check this list for what it can ask the user to get bytes from. It must be minimum one defined. If only one is defined, it does not ask, but go directly to that implementation. | GetBytesFromUrl |
 | FileTypeMappings |  | FileType[] | List of different file types and mappings between extensions, UTType (UTI) and mime-types. All file extensions in SupportedFileExtensions must be defined here to be supported. | Default value is all the values that is defined in the library used. Check for yourself if you need to add your own values. |
 | BorderOptions | borderOptions | BorderOptions | Define how the borders around parameters, etc. should look. | Default implementation |
+| ShowFolderPicker | showFolderPicker | bool | If set, ParameterType.String will show a button besides the text-input, as an option to getting input via selecting a folder | false |
+| TextReadOnlyWhenPickerIsShown | textReadOnly | bool | If ShowFolderPicker is shown, should the text-field be read only or not. | false |
+| AddText | addText | string | What should the text on the add-buttons be. | "Add" |
+| CancelText | cancelText | string | What should the text on the cancel-buttons be. | "Cancel" |
+| DeleteText | deleteText | string | What should the text on the delete-buttons be. | "Delete" |
+| ByteSizeText | byteSizeText | string | What should the text before the number of bytes is shown when getting bytes be. | "Selected item has size: " |
+| FilenameText | filenameText | string | What should the text before the file name is shown when getting bytes be. | "Filename: " |
+| PreviewOfThisContentNotAvailableText | previewContentNotAvailableText | string | What should the text to display when preview of byte-content is not available be. | "Preview of this content not available." |
+| PickBytesText | pickBytesText | string | What should the text on the PickBytes-button be. | "Select new resource" |
+| PickFolderText | pickFolderText | string | What should the text on the PickFolder-button be. | "Pick folder" |

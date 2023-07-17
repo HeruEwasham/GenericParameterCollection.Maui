@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui.Behaviors;
+using CommunityToolkit.Maui.Storage;
 
 namespace YngveHestem.GenericParameterCollection.Maui.InputViews;
 
@@ -12,7 +13,7 @@ internal class EntryView : ControlView<string>
         {
             Text = options.Value,
             Keyboard = options.Keyboard,
-            IsEnabled = !options.ReadOnly,
+            IsReadOnly = options.ReadOnly,
             TextColor = options.NormalTextOptions.TextColor,
             BackgroundColor = options.NormalTextOptions.BackgroundColor,
             FontAttributes = options.NormalTextOptions.FontAttributes,
@@ -39,8 +40,34 @@ internal class EntryView : ControlView<string>
             _editor.Behaviors.Add(textValidationBehavior);
         }
 
-        SetView(options.LabelOptions, _editor, options.BorderOptions);
+        if (!options.ReadOnly && options.ShowFolderPicker)
+        {
+            var folderButton = options.NormalTextOptions.CreateButton();
+            folderButton.Text = options.FolderPickerText;
+            folderButton.Clicked += FolderButtonClickedAsync;
+            _editor.IsReadOnly = options.TextReadOnlyWhenPickerIsShown;
+            var grid = new Grid
+            {
+                ColumnDefinitions = new ColumnDefinitionCollection(new ColumnDefinition(GridLength.Star), new ColumnDefinition(GridLength.Star))
+            };
+            grid.Add(_editor, 0);
+            grid.Add(folderButton, 1);
+            SetView(options.LabelOptions, grid, options.BorderOptions);
+        }
+        else
+        {
+            SetView(options.LabelOptions, _editor, options.BorderOptions);
+        }
 	}
+
+    private async void FolderButtonClickedAsync(object sender, EventArgs e)
+    {
+        var result = await FolderPicker.Default.PickAsync(_editor.Text, CancellationToken.None);
+        if (result != null && result.IsSuccessful)
+        {
+            _editor.Text = result.Folder.Path;
+        }
+    }
 
     public override string GetValue()
     {

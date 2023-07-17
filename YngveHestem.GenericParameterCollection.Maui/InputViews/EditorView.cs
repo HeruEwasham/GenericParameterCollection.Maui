@@ -13,7 +13,7 @@ internal class EditorView : ControlView<string>
             Text = options.Value,
             Keyboard = options.Keyboard,
             AutoSize = EditorAutoSizeOption.TextChanges,
-            IsEnabled = !options.ReadOnly,
+            IsReadOnly = options.ReadOnly,
             TextColor = options.NormalTextOptions.TextColor,
             BackgroundColor = options.NormalTextOptions.BackgroundColor,
             FontAttributes = options.NormalTextOptions.FontAttributes,

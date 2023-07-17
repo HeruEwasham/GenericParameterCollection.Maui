@@ -51,14 +51,14 @@ internal class DataPickerView : ControlView<byte[]>
         }
 
         view.RowDefinitions.Add(new RowDefinition(50));
-        view.Add(_options.InfoTextOptions.CreateLabel("Selected item has size: " + _byteData.Length.GetSizeInMemory()), 0, row);
+        view.Add(_options.SelectButtonOptions.CreateLabel(_options.SelectButtonText + _byteData.Length.GetSizeInMemory()), 0, row);
         
         row++;
 
         if (!string.IsNullOrWhiteSpace(_filePath))
         {
             view.RowDefinitions.Add(new RowDefinition(50));
-            view.Add(_options.InfoTextOptions.CreateLabel("Filename: " + _filePath), 0, row);
+            view.Add(_options.InfoTextOptions.CreateLabel(_options.FilenameText + _filePath), 0, row);
             row++;
         }
 
@@ -88,7 +88,7 @@ internal class DataPickerView : ControlView<byte[]>
     {
         if (_options.SupportedWaysToGetBytes.Length > 1)
         {
-            var selectedChoice = await _parentPage.DisplayActionSheet(_labelString, "Cancel", null, _options.SupportedWaysToGetBytes.Select(c => c.Name).ToArray());
+            var selectedChoice = await _parentPage.DisplayActionSheet(_labelString, _options.CancelText, null, _options.SupportedWaysToGetBytes.Select(c => c.Name).ToArray());
 
             var result = await _options.SupportedWaysToGetBytes.First(c => c.Name == selectedChoice).GetBytes(_options.SupportedFileTypes, _parentPage);
             if (result != null)
@@ -126,7 +126,7 @@ internal class DataPickerView : ControlView<byte[]>
             }
         }
         var label = _options.InfoTextOptions.CreateLabel();
-        label.Text = "Preview of this content not available.";
+        label.Text = _options.ByteSizeText;
         return label;
     }
 }
