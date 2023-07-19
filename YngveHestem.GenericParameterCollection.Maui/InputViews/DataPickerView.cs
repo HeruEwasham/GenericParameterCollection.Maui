@@ -51,7 +51,7 @@ internal class DataPickerView : ControlView<byte[]>
         }
 
         view.RowDefinitions.Add(new RowDefinition(50));
-        view.Add(_options.SelectButtonOptions.CreateLabel(_options.SelectButtonText + _byteData.Length.GetSizeInMemory()), 0, row);
+        view.Add(_options.InfoTextOptions.CreateLabel(_options.ByteSizeText + _byteData.Length.GetSizeInMemory()), 0, row);
         
         row++;
 
@@ -126,7 +126,7 @@ internal class DataPickerView : ControlView<byte[]>
             }
         }
         var label = _options.InfoTextOptions.CreateLabel();
-        label.Text = _options.ByteSizeText;
+        label.Text = _options.PreviewOfThisContentNotAvailableText;
         return label;
     }
 }

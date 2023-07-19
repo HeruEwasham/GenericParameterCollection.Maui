@@ -17,13 +17,13 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
         /// <param name="displayPrompt">Display a prompt. Parameters are title, message, accept and cancel.</param>
         /// <param name="selectButtonText">What will be said on the select-button.</param>
         /// <exception cref="ArgumentException"></exception>
-        public DataPickerCell(Parameter parameter, ParameterCollectionViewOptions options, Page parentPage, string selectButtonText = "Select new resource") : base(parameter)
+        public DataPickerCell(Parameter parameter, ParameterCollectionViewOptions options, Page parentPage) : base(parameter)
         {
             var dataPickerOptions = new DataPickerOptions
             {
                 LabelOptions = options.ParameterNameLabelOptions(parameter.Key),
                 Value = parameter.GetValue<byte[]>(Extensions.CUSTOM_PARAMETER_CONVERTERS),
-                SelectButtonText = selectButtonText,
+                SelectButtonText = options.PickBytesText,
                 SupportedFileTypes = options.FileTypeMappings.GetByExtension(options.SupportedFileExtensions).ToArray(),
                 SupportedPreviews = options.BytesPreviews,
                 SupportedWaysToGetBytes = options.SupportedWaysToGetBytes,
@@ -34,7 +34,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.InputCells
                 ByteSizeText = options.ByteSizeText,
                 FilenameText = options.FilenameText,
                 PreviewOfThisContentNotAvailableText = options.PreviewOfThisContentNotAvailableText,
-                CancelText = options.CancelText,
+                CancelText = options.CancelText
             };
 
             if (parameter.HasAdditionalInfo())

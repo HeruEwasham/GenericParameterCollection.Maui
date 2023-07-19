@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using YngveHestem.GenericParameterCollection;
 using YngveHestem.GenericParameterCollection.Maui;
+using YngveHestem.GenericParameterCollection.Maui.Bytes;
 using Extensions = YngveHestem.GenericParameterCollection.Maui.Extensions;
 
 namespace TestProject;
@@ -66,7 +67,15 @@ public class ParameterCollectionTestPage : ContentPage
         };
         button.Clicked += async (s, e) =>
         {
-            var popup = new ParameterCollectionPopup(Parameters, this, null, new ParameterCollectionPopupOptions
+            var popup = new ParameterCollectionPopup(Parameters, this, new ParameterCollectionViewOptions
+            {
+                PickBytesText = "Pick file",
+                ByteSizeText = "Size: ",
+                SupportedWaysToGetBytes = new IGetBytes[]
+                {
+                    new GetBytesFromFilePicker()/*, new GetBytesFromUrl()*/
+                }
+            }, new ParameterCollectionPopupOptions
             {
                 CancelButtonOptions = new YngveHestem.GenericParameterCollection.Maui.InputViews.LabelOptions
                 {
