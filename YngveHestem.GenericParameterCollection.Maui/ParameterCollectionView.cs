@@ -85,7 +85,7 @@ public class ParameterCollectionView : ContentView
 
     private Tuple<ViewCell, GridLength> GetCellForParameter(Parameter parameter, ParameterCollectionViewOptions options)
     {
-        if (parameter.Type == ParameterType.String || parameter.Type == ParameterType.Int || parameter.Type == ParameterType.Float || parameter.Type == ParameterType.Double || parameter.Type == ParameterType.Long)
+        if (parameter.Type == ParameterType.String || parameter.Type == ParameterType.Int || parameter.Type == ParameterType.Decimal)
         {
             return new (new InputCells.EntryCell(parameter, options), SingleRowHeight);
         }
@@ -139,9 +139,7 @@ public class ParameterCollectionView : ContentView
         {
             return new(new EditableListCell<EntryView, string>(parameter, "0", options, _parentPage), GridLength.Auto);
         }
-        else if (parameter.Type == ParameterType.Float_IEnumerable
-            || parameter.Type == ParameterType.Double_IEnumerable
-            || parameter.Type == ParameterType.Long_IEnumerable)
+        else if (parameter.Type == ParameterType.Decimal_IEnumerable)
         {
             return new (new EditableListCell<EntryView, string>(parameter, "0.0", options, _parentPage), GridLength.Auto);
         }

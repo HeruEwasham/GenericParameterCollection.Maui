@@ -82,17 +82,9 @@ namespace YngveHestem.GenericParameterCollection.Maui
                     {
                         return Regex.IsMatch(parameter.GetValue<int>().ToString(), regex);
                     }
-                    else if (parameter.Type == ParameterType.Float)
+                    else if (parameter.Type == ParameterType.Decimal)
                     {
-                        return Regex.IsMatch(parameter.GetValue<float>().ToString(), regex);
-                    }
-                    else if (parameter.Type == ParameterType.Double)
-                    {
-                        return Regex.IsMatch(parameter.GetValue<double>().ToString(), regex);
-                    }
-                    else if (parameter.Type == ParameterType.Long)
-                    {
-                        return Regex.IsMatch(parameter.GetValue<long>().ToString(), regex);
+                        return Regex.IsMatch(parameter.GetValue<decimal>().ToString(), regex);
                     }
                     else if (parameter.Type == ParameterType.String_IEnumerable || parameter.Type == ParameterType.String_Multiline_IEnumerable)
                     {
@@ -102,17 +94,9 @@ namespace YngveHestem.GenericParameterCollection.Maui
                     {
                         return parameter.GetValue<int[]>().All(value => Regex.IsMatch(value.ToString(), regex));
                     }
-                    else if (parameter.Type == ParameterType.Float_IEnumerable)
+                    else if (parameter.Type == ParameterType.Decimal_IEnumerable)
                     {
-                        return parameter.GetValue<float[]>().All(value => Regex.IsMatch(value.ToString(), regex));
-                    }
-                    else if (parameter.Type == ParameterType.Double_IEnumerable)
-                    {
-                        return parameter.GetValue<double[]>().All(value => Regex.IsMatch(value.ToString(), regex));
-                    }
-                    else if (parameter.Type == ParameterType.Long_IEnumerable)
-                    {
-                        return parameter.GetValue<double[]>().All(value => Regex.IsMatch(value.ToString(), regex));
+                        return parameter.GetValue<decimal[]>().All(value => Regex.IsMatch(value.ToString(), regex));
                     }
                     else if (parameter.Type == ParameterType.ParameterCollection)
                     {

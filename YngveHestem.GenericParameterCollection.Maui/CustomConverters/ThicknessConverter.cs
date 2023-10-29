@@ -21,7 +21,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.CustomConverters
                         && parameters.HasKeyAndCanConvertTo("top", validType)
                         && parameters.HasKeyAndCanConvertTo("bottom", validType));
                 }
-                else if (sourceType == ParameterType.Double || sourceType == ParameterType.Float || sourceType == ParameterType.Int || sourceType == ParameterType.Long)
+                else if (sourceType == ParameterType.Decimal || sourceType == ParameterType.Int)
                 {
                     return true;
                 }
@@ -31,7 +31,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.CustomConverters
 
         public bool CanConvertFromValue(ParameterType targetType, Type sourceType, object value)
         {
-            return sourceType == typeof(Thickness) && (targetType == ParameterType.ParameterCollection || targetType == ParameterType.Double || targetType == ParameterType.Float || targetType == ParameterType.Int || targetType == ParameterType.Long);
+            return sourceType == typeof(Thickness) && (targetType == ParameterType.ParameterCollection || targetType == ParameterType.Decimal || targetType == ParameterType.Int);
         }
 
         public object ConvertFromParameter(ParameterType sourceType, Type targetType, JToken rawValue, JsonSerializer jsonSerializer)
@@ -55,7 +55,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.CustomConverters
                         return new Thickness(parameters.GetByKey<double>("horizontalSize"), parameters.GetByKey<double>("verticalSize"));
                     }
                 }
-                else if (sourceType == ParameterType.Double || sourceType == ParameterType.Float || sourceType == ParameterType.Int || sourceType == ParameterType.Long) {
+                else if (sourceType == ParameterType.Decimal || sourceType == ParameterType.Int) {
                     return new Thickness(rawValue.ToObject<double>(jsonSerializer));
                 }
             }
@@ -78,7 +78,7 @@ namespace YngveHestem.GenericParameterCollection.Maui.CustomConverters
                         { "bottom", v.Bottom }
                     });
                 }
-                else if (targetType == ParameterType.Double || targetType == ParameterType.Float || targetType == ParameterType.Int || targetType == ParameterType.Long)
+                else if (targetType == ParameterType.Decimal || targetType == ParameterType.Int)
                 {
                     if (v.Left == v.Top && v.Top == v.Right && v.Right == v.Bottom)
                     {

@@ -16,37 +16,40 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 
-		<Version>1.0.0-beta05</Version>
+		<Version>1.0.0-beta06</Version>
     <Description>This provides controls for using GenericParameterCollection in .NET MAUI.</Description>
     <PackageReleaseNotes>
-				Version 1.0.0-beta05:
-        - Fixed some errors in how the customizable text was displayed when the ParameterType was Bytes.
-        
-				Version 1.0.0-beta04:
-        - Fixed the problem with the popup-properties not working by adding them in it's own options-object.
-        - Added properties to view-options to make the text shown more customizable (including the possibillity to set the text in different languages).
-        - Added the possibillity to use a ParameterType.String to pick a folder.
-        - Some other small changes.
-        
-				Version 1.0.0-beta03:
-        - Fixed bug with Dates going out of bounds and crashing on Windows.
-        - Set Date- and Time-pickers on same line.
-        - The text on the ParameterCollection-header is now the same as the ParameterName-settings.
-        - The Add-button problem on windows on lists is fixed by a workaround on windows.
-        - The SwipeView on each element in a list have gotten a context-menu attached to it, so you on desktop with a mouse can right-click to get the delete-button also. As Windows do not support SwipeView when using a mouse, this is your only option on Windows when using a mouse.
-        - Selecting multiple values from a list should now work on Windows also.
-        - Other fixes.
-        
-        Version 1.0.0-beta02:
-        - Build from Windows machine, so Windows should also be supported.
-        - Updated dependencies
-        - Known bugs in this version: 
-					- On Windows (and only Windows), it seems that dates don't work so well.
-          - On Windows and Mac it seems that lists don't work very well. Windows will not show the Add-button. In addittion Windows crashes when possible to select multiple values, while Mac seems to crash for any list-type.
+      Version 1.0.0-beta06:
+      - Updated YngveHestem.GenericParameterColection to version 1.0.2-beta23.
       
-        Version 1.0.0-beta01:
-        - Initial release of a working version.
-		- Mark that even if this version is working, it is still some bugs and oddities, and the project is not finished. But especially the ParameterCollectionView should be usable, even if it is not perfect.
+      Version 1.0.0-beta05:
+      - Fixed some errors in how the customizable text was displayed when the ParameterType was Bytes.
+
+      Version 1.0.0-beta04:
+      - Fixed the problem with the popup-properties not working by adding them in it's own options-object.
+      - Added properties to view-options to make the text shown more customizable (including the possibillity to set the text in different languages).
+      - Added the possibillity to use a ParameterType.String to pick a folder.
+      - Some other small changes.
+
+      Version 1.0.0-beta03:
+      - Fixed bug with Dates going out of bounds and crashing on Windows.
+      - Set Date- and Time-pickers on same line.
+      - The text on the ParameterCollection-header is now the same as the ParameterName-settings.
+      - The Add-button problem on windows on lists is fixed by a workaround on windows.
+      - The SwipeView on each element in a list have gotten a context-menu attached to it, so you on desktop with a mouse can right-click to get the delete-button also. As Windows do not support SwipeView when using a mouse, this is your only option on Windows when using a mouse.
+      - Selecting multiple values from a list should now work on Windows also.
+      - Other fixes.
+
+      Version 1.0.0-beta02:
+      - Build from Windows machine, so Windows should also be supported.
+      - Updated dependencies
+      - Known bugs in this version:
+      - On Windows (and only Windows), it seems that dates don't work so well.
+      - On Windows and Mac it seems that lists don't work very well. Windows will not show the Add-button. In addittion Windows crashes when possible to select multiple values, while Mac seems to crash for any list-type.
+
+      Version 1.0.0-beta01:
+      - Initial release of a working version.
+      - Mark that even if this version is working, it is still some bugs and oddities, and the project is not finished. But especially the ParameterCollectionView should be usable, even if it is not perfect.
     </PackageReleaseNotes>
     <Authors>Yngve J. K. Hestem</Authors>
     <Copyright>Copyright (c) Yngve J. K. Hestem 2023</Copyright>
@@ -65,9 +68,9 @@
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+	  <PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
 	  <PackageReference Include="YngveHestem.FileTypeInfo" Version="1.0.2" />
-	  <PackageReference Include="YngveHestem.GenericParameterCollection" Version="1.0.2-beta22" />
+	  <PackageReference Include="YngveHestem.GenericParameterCollection" Version="1.0.2-beta23" />
 	  <PackageReference Include="YngveHestem.BytesPreview.Maui.Core" Version="1.0.1" />
 	</ItemGroup>
 	<ItemGroup>
